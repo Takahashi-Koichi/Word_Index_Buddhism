@@ -1,0 +1,307 @@
+﻿body{
+	font-size:100%;
+	line-height:1.8;
+	letter-spaceing:normal;
+	word-spacing:normal;
+	margin-top:0px;
+	margin-bottom:0px;
+	margin-right:auto;
+	margin-left:auto;
+	padding-top:0px;
+	padding-right:0px;
+	padding-left:0px;
+	padding-bottom:0px;
+	width:900px;
+	background:url(../foto/079_small.jpg);
+	background-attachment:fixed;
+}
+body.inner{
+	width:100%;
+	background-color:#FFFFE3;
+	font-size:100%;
+}
+
+/*heading*/
+h1{
+	font-size:150%;
+}
+h2{
+	font-size:140%;
+}
+#dharma100{
+	color:red;
+}
+h3{
+	font-size:130%;
+}
+h4{
+	font-size:120%;
+}
+h5{
+	font-size:110%;
+}
+h6{
+	font-size:100%;
+}
+
+/*divisions*/
+div.title{
+	height:100px;
+	width:900px;
+	background:url(../foto/title_pink.jpg);
+}
+div.chapter_title{
+	font-size:180%;
+	font-weight:bold;
+	text-indent:20px;
+}
+div.section_title{
+	font-size:160%;
+	font-weight:bold;
+	text-indent:30px;
+}
+.wrap{
+	padding-right:30px;
+	padding-left:30px;
+	background-color:#FFFFE3;
+	margin-top:0px;
+	padding-top:0px;
+	padding-right:15px;
+	padding-left:15px;
+	padding-bottom:10px;
+}
+.chapter{
+	padding-left:100px;
+	padding-right:100px;
+}
+.date{
+	text-align:right;
+}
+.menu{
+	width:900px;
+	height:50px;
+}
+#announcement{
+	margin-right:50px;
+	margin-left:50px;
+}
+.browser_info{
+	margin-left:20px;
+	font-size:90%;
+}
+.definition_head{
+	font-weight:bold;
+	font-size:180%;
+}
+.definition{
+	font-weight:bold;
+}
+.text_title{
+	font-weight:bold;
+}
+title{
+	color:pink;
+}
+.bottom{
+	background-color:#ffcccc;
+	width:900px;
+	height:30px;
+	margin-bottom:0px;
+}
+#all_equivalent{
+	width:1000px;
+}
+#menu_in_koza{
+	margin-left:20px;
+}
+.navi_def a{
+	background-color:pink;
+}
+.inner{
+	background-color:#FFFFE3;
+}
+.text_search{
+	font-weight:bold;
+	font-size:120%;
+	font-style:italic;
+	color:orange;
+}
+.text_note{
+	font-weight:bold;
+	/*font-size:120%;*/
+	/*font-style:italic;*/
+	/*color:orange*/
+}
+.genre{
+	font-weight:bold;
+	font-size:110%;
+}
+#other_example{
+	font-size:110%;
+	color:orange;
+}
+.staff_info{
+	margin-top:30px;
+	margin-left:30px;
+}
+.team_name{
+	font-weight:bold;
+	font-size:120%;
+}
+.period{
+	text-indent:10px;
+}
+/*paragraph*/
+p{
+	text-indent:1em;
+}
+.in_koza{
+	text-indent:1em;
+	margin-top:0px;
+	margin-bottom:0px;
+	padding-left:25px;
+	padding-right:25px;
+}
+p.caption{
+	margin:0px;
+	padding:0px;
+	text-align:right;	
+}
+.attention{
+	color:purple;
+	margin-top:0.5px;
+	margin-bottom:0.5px;
+}
+
+/*table*/
+table{
+}
+th{
+	text-align:left;
+}
+td{
+	padding-right:10px;
+}
+
+ul#news{
+//	border:solid;
+	border-width:0.5px;
+	border-color:#990000;
+	height:200px;
+	margin-bottom:0px;
+}
+.staff_member{
+	margin-top:0.5px;
+}
+/*images*/
+img{
+	width:100%;
+}
+
+/*a*/
+a.navi:after{
+	content:" |";
+}
+a.switch{
+	background-color:lightblue;
+	border:outset;
+	border-color:skyblue;
+	border-width:2.8px;
+	text-decoration:none;
+	margin-right:5px;
+	margin-left:5px;
+	font-size:70%;
+	width:5px;
+}
+
+hr.half{
+	width:450px;
+	text-align:left;/*Mozilla,左寄席にならない*/
+	margin-left:0px;/*Mozilla,上記バグ対策*/
+}
+
+/*span*/
+span#copyright{
+	float:left;
+	margin-left:40px;
+}
+#address{
+	float:right;
+	margin-right:20px;
+}
+.editor_name:before{
+	content:"ed. by ";
+}
+.editor_name:after{
+	content:", ";
+}
+.date:after{
+/*	content:", ";*/
+	content:":";
+}
+.lang_bo{
+	font-style:italic;
+}
+.lang_sa{
+	font-style:italic;
+}
+.lang_zh:before{
+	content:"『";
+}
+.lang_zh:after{
+	content:"』";
+}
+span.navi:after{
+	content:"/";
+}
+span.renewal_info{
+	text-align:right;
+margin-right:0px;
+}
+span.switch{
+	margin-left:5px;
+	margin-right:5px;
+}
+
+/*xmlタグ*/
+floatingText{
+	color:green;
+}
+quote{
+	counter-reset:note;
+}
+def{
+	counter-reset:note;
+}
+target{
+	text-decoration:blink;
+	counter-increment:note;
+}
+target:after{
+	content:counter(note)")";
+	color:blue;
+	text-decoration:underline;
+	font-size:60%;
+	vertical-align:super;
+}
+/*target:before{
+	content:"(" counter(note);
+	color:red;
+	font-size:60%;
+	vertical-align:super;
+} */
+target:hover{
+/*	color:#99ff00;*/
+color:red;
+	font-style:italic;
+	}
+translation{
+/*	color:red;*/
+}
+verse{
+	font-weight:bold;
+}
+
+term{
+	color:red;
+}
