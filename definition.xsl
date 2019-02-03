@@ -23,7 +23,7 @@
 
   <!--  見出し語書式  -->
   <xsl:template match="entry">
-      <div ><font color="red"><xsl:value-of select="form/orth" /></font>[</font><xsl:value-of select="form/orth/@xml:lang" />]</div>
+      <div ><font color="red"><xsl:value-of select="form/orth" /></font>[<xsl:value-of select="form/orth/@xml:lang" />]</div>
       <div class="sense">
 	<xsl:value-of select="sense/def" />
       </div>
