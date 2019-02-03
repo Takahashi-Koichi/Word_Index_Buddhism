@@ -3,83 +3,79 @@ var xslObj01;
 var xslObj02;
 var xslProc;
 var str="";
+var xmlDoc
+var xslDoc01;
+
+//Bauddhakosha,sort_entries.jsからコピー、2019/02/03
+// ブラウザ判別IE11対応、2015/04/18
+//chang if(!document.all) into if(!isIE)
+var ua, isIE;
+
+// "http://garafu.blogspot.jp/2013/08/useragent-ie11.html"参照。
+// UserAgent を小文字に正規化
+ua = window.navigator.userAgent.toLowerCase();
+// IE or else 判別
+isIE = (ua.indexOf('msie') >= 0 || ua.indexOf('trident') >=0);
 
 function Init(){
 	//ブラウザ判別
-	if(document.all){
-		//Internet Explorer
-		xmlObj=new ActiveXObject("MSXML2.DOMDocument");
-		xslObj01=new ActiveXObject("MSXML2.DOMDocument");
-//		xslObj02=new ActiveXObject("MSXML2.DOMDocument");
-	}else{
+	if(!isIE){
 		// Mozilla
-		xmlObj = document.implementation.createDocument("", "", null);
-		xslObj01 = document.implementation.createDocument("", "", null);
-//		xslObj02 = document.implementation.createDocument("", "", null);
+		//XMLの読み込み
+		xmlObj = new XMLHttpRequest();
+		xmlObj.open("GET","word_index_IBTJ_ver3.xml",false);
+		xmlObj.setRequestHeader('Content-Type', 'text/xml');
+		xmlObj.overrideMimeType('text/xml');
+		xmlObj.send();
+		xmlDoc = xmlObj.responseXML;
+
+		//XSLTの読み込み
+		xslObj01 = new XMLHttpRequest();
+		xslObj01.open("GET","definition.xsl",false);
+		xslObj01.setRequestHeader('Content-Type', 'text/xml');
+		xslObj01.overrideMimeType('text/xml');
+		xslObj01.send();
+		xslDoc01 = xslObj01.responseXML;
+
+	}else{
+		//Internet Explorer
+		xmlDoc=new ActiveXObject("MSXML2.DOMDocument");
+
+		xslDoc01=new ActiveXObject("MSXML2.FreeThreadedDOMDocument");
+
+		//*xml, *xslt読み込み
+		xmlDoc.async=false;
+		xmlDoc.load("word_index_IBTJ_ver3.xml");
+		xslDoc01.async=false;
+		xslDoc01.load("definition.xsl");
+
 	}
-	//*xml, *xslt読み込み
-	xmlObj.async=false;
-	xmlObj.load("word_index_IBTJ_ver3.xml");
-	xslObj01.async=false;
-	xslObj01.load("definition.xsl");
-	//表示
 //	Show();
 }
-
-//function onButtonClick() {
-//        target = document.getElementById("output");
-//        target.innerText = document.forms.forms.form_01.value;
-//      }
-
-//XSLT辞書項目書式の適用
-//function onButtonClick(){
-//        target = document.getElementById("output");
-//	//ブラウザ判別
-//	if(document.all){
-//		//Internet Explore
-//		foundEntry=xslObj01.selectSingleNode("//xsl:apply-templates");
-//		foundEntry.setAttribute("select","TEI/data/entry[form/orth='"+target+"']");
-//	}else{
-//		//Mozilla
-//		foundEntry=xslObj02.getElementsByTagName("xsl:apply-templates");
-//		foundEntry.item(0).setAttribute("select","TEI/data/entry[form/orth='"+target+"']");
-//	}
-//	Result();
-//}
-
-
 
 //XSLT辞書項目書式の適用
 function onButtonClick(){
 	var foundEntry;
 	var btn = document.forms.forms.form_01.value;
 	//ブラウザ判別
-	if(document.all){
-		//Internet Explore
-		foundEntry=xslObj01.selectSingleNode("//xsl:apply-templates");
-		foundEntry.setAttribute("select","TEI/data/entry[form/orth[contains(., '"+btn+"')]]");
-	}else{
+	if(!isIE){
 		//Mozilla
-		foundEntry=xslObj01.getElementsByTagName("xsl:apply-templates");
+		foundEntry=xslDoc01.getElementsByTagNameNS("http://www.w3.org/1999/XSL/Transform","apply-templates");
 		foundEntry.item(0).setAttribute("select","TEI/data/entry[form/orth[contains(., '"+btn+"')]]");
+		xslProc = new XSLTProcessor();
+		xslProc.importStylesheet(xslDoc01);
+		var fragment = xslProc.transformToFragment(xmlDoc, document);
+		document.getElementById('output').innerHTML = "";
+		document.getElementById('output').appendChild(fragment);
+	}else{
+		//Internet Explore
+		foundEntry=xslDoc01.selectSingleNode("//xsl:apply-templates");
+		foundEntry.setAttribute("select","TEI/data/entry[form/orth[contains(., '"+btn+"')]]");
+		str = xmlDoc.transformNode(xslDoc01);
+		output.innerHTML = str;
 	}
-	Result();
+//	Result();
 }
-
-//function Show(){
-//	if(document.all){
-//		//Internet Explorer
-//		str = xmlObj.transformNode(xslObj01);
-//		output.innerHTML = str;
-//	}else{
-//		// Mozilla
-//		xslProc = new XSLTProcessor();
-//		xslProc.importStylesheet(xslObj01);
-//		var fragment = xslProc.transformToFragment(xmlObj, document);//
-//		document.getElementById('output').innerHTML = "";
-//		document.getElementById('output').appendChild(fragment);
-//	}
-//}
 
 function Result(){
 	if(document.all){
