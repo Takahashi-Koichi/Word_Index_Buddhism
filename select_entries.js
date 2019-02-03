@@ -57,6 +57,9 @@ function Init(){
 function onButtonClick(){
 	var foundEntry;
 	var btn = document.forms.forms.form_01.value;
+	target = document.getElementById("show");
+        target.innerText = document.forms.forms.form_01.value + "を含む項目";
+
 	//ブラウザ判別
 	if(!isIE){
 		//Mozilla
